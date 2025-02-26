@@ -13,6 +13,10 @@ from crud import (
 
 router = APIRouter()
 
+# Health Check Route
+@router.get("/health")
+def health_check():
+    return {"status": "ok"}
 
 @router.post("/products/", response_model=ProductResponse)
 def create_product_route(product: ProductCreate, db: Session = Depends(get_db)):
