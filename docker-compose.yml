@@ -1,0 +1,51 @@
+version: '3.8'
+services:
+  # postgres:
+  #   image: postgres:latest
+    # volumes:
+    #   - postgres_data:/var/lib/postgresql/data
+    # environment:
+    #   POSTGRES_DB: mydatabase
+    #   POSTGRES_USER: user
+    #   POSTGRES_PASSWORD: password
+    # ports:
+    #   - "5432:5432"
+    # networks:
+    #   - mynetwork
+
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/app
+    environment:
+      # DATABASE_URL: postgresql://user:password@postgres/mydatabase
+      POSTGRES_HOST: ${POSTGRES_HOST}  # Usa a variável de ambiente
+      POSTGRES_USER: ${POSTGRES_USER}  # Usa a variável de ambiente
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}  # Usa a variável de ambiente
+      POSTGRES_DB: ${POSTGRES_DB}  # Usa a variável de ambiente
+      POSTGRES_PORT: ${POSTGRES_PORT}  # Usa a variável de ambiente
+    ports:
+      - "8000:8000"
+    # depends_on:
+    #   - postgres
+    networks:
+      - mynetwork
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "8501:8501"
+    networks:
+      - mynetwork
+        
+networks:
+  mynetwork:
+
+# volumes:
+#   postgres_data:
