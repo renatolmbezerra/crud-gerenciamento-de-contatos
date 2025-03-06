@@ -1,1 +1,1 @@
-# projeto-crud-cadastro-produtos
+# projeto-crud-gerenciamento-de-contatos
