@@ -7,7 +7,7 @@ class ContactModel(Base):
     __tablename__ = "contatos"  # esse será o nome da tabela
 
     id = Column(Integer, primary_key=True, index=True)
-    Operador = Column(String, index=True)
+    operador = Column(String, index=True)
     dataContato = Column(DateTime(timezone=True), index=True)
     nomeCliente = Column(String, index=True)
     pessoaContato = Column(String, index=True)

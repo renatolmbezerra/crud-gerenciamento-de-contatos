@@ -1,53 +1,72 @@
 from sqlalchemy.orm import Session
-from schemas import ProductUpdate, ProductCreate
-from models import ProductModel
+from schemas import ContactUpdate, ContactCreate
+from models import ContactModel
 
 
-def get_product(db: Session, product_id: int):
+def get_contact(db: Session, contact_id: int):
     """
-    funcao que recebe um id e retorna somente ele
+    funcao que recebe um id e retorna o elemento com esse id
     """
-    return db.query(ProductModel).filter(ProductModel.id == product_id).first()
+    return db.query(ContactModel).filter(ContactModel.id == contact_id).first()
 
 
-def get_products(db: Session):
+def get_contacts(db: Session):
     """
     funcao que retorna todos os elementos
     """
-    return db.query(ProductModel).all()
+    return db.query(ContactModel).all()
 
 
-def create_product(db: Session, product: ProductCreate):
-    db_product = ProductModel(**product.model_dump())
-    db.add(db_product)
+def create_contact(db: Session, contact: ContactCreate):
+    """
+    funcao que cria um novo elemento
+    """
+    db_contact = ContactModel(**contact.model_dump())
+    db.add(db_contact)
     db.commit()
-    db.refresh(db_product)
-    return db_product
+    db.refresh(db_contact)
+    return db_contact
 
 
-def delete_product(db: Session, product_id: int):
-    db_product = db.query(ProductModel).filter(ProductModel.id == product_id).first()
-    db.delete(db_product)
+def delete_contact(db: Session, contact_id: int):
+    """
+    funcao que deleta um elemento
+    """
+    db_contact = db.query(ContactModel).filter(ContactModel.id == contact_id).first()
+    db.delete(db_contact)
     db.commit()
-    return db_product
+    return db_contact
 
 
-def update_product(db: Session, product_id: int, product: ProductUpdate):
-    db_product = db.query(ProductModel).filter(ProductModel.id == product_id).first()
+def update_contact(db: Session, contact_id: int, contact: ContactUpdate):
+    """
+    funcao que atualiza um elemento
+    """
+    db_contact = db.query(ContactModel).filter(ContactModel.id == contact_id).first()
 
-    if db_product is None:
+    if db_contact is None:
         return None
 
-    if product.name is not None:
-        db_product.name = product.name
-    if product.description is not None:
-        db_product.description = product.description
-    if product.price is not None:
-        db_product.price = product.price
-    if product.categoria is not None:
-        db_product.categoria = product.categoria
-    if product.email_fornecedor is not None:
-        db_product.email_fornecedor = product.email_fornecedor
+    if contact.operador is not None:
+        db_contact.operador = contact.operador
+    if contact.dataContato is not None:
+        db_contact.dataContato = contact.dataContato
+    if contact.nomeCliente is not None:
+        db_contact.nomeCliente = contact.nomeCliente
+    if contact.pessoaContato is not None:
+        db_contact.pessoaContato = contact.pessoaContato
+    if contact.formaContato1 is not None:
+        db_contact.formaContato1 = contact.formaContato1
+    if contact.formaContato2 is not None:
+        db_contact.formaContato2 = contact.formaContato2
+    if contact.tipoContato is not None:
+        db_contact.tipoContato = contact.tipoContato   
+    if contact.pedidoGerado is not None:
+        db_contact.pedidoGerado = contact.pedidoGerado
+    if contact.motivoDeclino is not None:
+        db_contact.motivoDeclino = contact.motivoDeclino
+    if contact.observacao is not None:
+        db_contact.observacao = contact.observacao
 
     db.commit()
-    return db_product
+    return db_contact
