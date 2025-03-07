@@ -1,54 +1,78 @@
-from pydantic import BaseModel, PositiveFloat, EmailStr, validator, Field
+from pydantic import BaseModel, validator, Field
 from enum import Enum
 from datetime import datetime
 from typing import Optional
 
 
-class CategoriaBase(Enum):
-    categoria1 = "Eletrônico"
-    categoria2 = "Eletrodoméstico"
-    categoria3 = "Móveis"
-    categoria4 = "Roupas"
-    categoria5 = "Calçados"
+# Enums para campos com opções predefinidas
+class FormaContatoEnum(str, Enum):
+    WHATSAPP = "Whatsapp"
+    LIGACAO = "Ligação"
+    VISITA = "Visita"
+    EMAIL = "E-mail"
+
+class TipoContatoEnum(str, Enum):
+    ATIVO = "Ativo"
+    RECEPTIVO = "Receptivo"
+
+class PedidoGeradoEnum(str, Enum):
+    SIM = "Sim"
+    NAO = "Não"
+
+class MotivoDeclinioEnum(str, Enum):
+    SEM_DEMANDA = "Sem demanda"
+    PRECO = "Preço"
+    SEM_ESTOQUE = "Sem estoque"
+    CREDITO = "Crédito"
+    LOGISTICA = "Logística"
+    PROSPECCAO = "Prospecção"
 
 
-class ProductBase(BaseModel):
-    name: str
-    description: Optional[str] = None
-    price: PositiveFloat
-    categoria: str
-    email_fornecedor: EmailStr
+# Schema para criação de um novo contato
+class ContactBase(BaseModel):
+    dataContato: datetime
+    nomeCliente: str = Field(..., min_length=1, max_length=100)
+    pessoaContato: str = Field(..., min_length=1, max_length=100)
+    formaContato1: FormaContatoEnum
+    formaContato2: Optional[FormaContatoEnum] = None
+    tipoContato: TipoContatoEnum
+    pedidoGerado: PedidoGeradoEnum
+    motivoDeclino: Optional[MotivoDeclinioEnum] = None
+    observacao: Optional[str] = Field(None, min_length=1, max_length=255)
 
-    @validator("categoria")
-    def check_categoria(cls, v):
-        if v in [item.value for item in CategoriaBase]:
-            return v
-        raise ValueError("Categoria inválida")
+    # Validação para garantir que a data do contato não seja no futuro
+    @validator('dataContato')
+    def data_nao_pode_ser_futura(cls, value):
+        if value > datetime.now():
+            raise ValueError('A data do contato não pode ser no futuro')
+        return value
 
 
-class ProductCreate(ProductBase):
+class ContactCreate(ContactBase):
     pass
 
 
-class ProductResponse(ProductBase):
+class ContactResponse(ContactBase):
     id: int
     created_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
-class ProductUpdate(BaseModel):
-    name: Optional[str] = None
-    description: Optional[str] = None
-    price: Optional[PositiveFloat] = None
-    categoria: Optional[str] = None
-    email_fornecedor: Optional[EmailStr] = None
+class ContactUpdate(BaseModel):
+    dataContato: Optional[datetime] = None
+    nomeCliente: Optional[str] = Field(None, min_length=1, max_length=100)
+    pessoaContato: Optional[str] = Field(None, min_length=1, max_length=100)
+    formaContato1: Optional[FormaContatoEnum] = None
+    formaContato2: Optional[FormaContatoEnum] = None
+    tipoContato: Optional[TipoContatoEnum] = None
+    pedidoGerado: Optional[PedidoGeradoEnum] = None
+    motivoDeclino: Optional[MotivoDeclinioEnum] = None
+    observacao: Optional[str] = Field(None, min_length=1, max_length=255)
 
-    @validator("categoria", pre=True, always=True)
-    def check_categoria(cls, v):
-        if v is None:
-            return v
-        if v in [item.value for item in CategoriaBase]:
-            return v
-        raise ValueError("Categoria inválida")
+    @validator('dataContato')
+    def data_nao_pode_ser_futura(cls, value):
+        if value and value > datetime.now():
+            raise ValueError('A data do contato não pode ser no futuro')
+        return value

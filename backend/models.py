@@ -1,15 +1,19 @@
-from sqlalchemy import Column, Integer, String, Float, DateTime
+from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.sql import func
 from database import Base
 
 
-class ProductModel(Base):
-    __tablename__ = "products"  # esse será o nome da tabela
+class ContactModel(Base):
+    __tablename__ = "contatos"  # esse será o nome da tabela
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-    description = Column(String, index=True)
-    price = Column(Float, index=True)
-    categoria = Column(String, index=True)
-    email_fornecedor = Column(String, index=True)
+    dataContato = Column(DateTime(timezone=True), index=True)
+    nomeCliente = Column(String, index=True)
+    pessoaContato = Column(String, index=True)
+    formaContato1 = Column(String, index=True)
+    formaContato2 = Column(String, index=True)
+    tipoContato = Column(String, index=True)
+    pedidoGerado = Column(String, index=True)
+    motivoDeclino = Column(String, index=True)
+    observacao = Column(String, index=True)
     created_at = Column(DateTime(timezone=True), default=func.now(), index=True)
