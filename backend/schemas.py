@@ -5,6 +5,17 @@ from typing import Optional
 
 
 # Enums para campos com opções predefinidas
+class OperadorEnum(str, Enum):
+    OPERADOR_1 = "Matheus"
+    OPERADOR_2 = "Lucas"
+    OPERADOR_3 = "João"
+    OPERADOR_4 = "Pedro"
+    OPERADOR_5 = "Maria"
+    OPERADOR_5 = "Ana"
+    OPERADOR_6 = "José"
+    OPERADOR_7 = "Carlos"
+
+
 class FormaContatoEnum(str, Enum):
     WHATSAPP = "Whatsapp"
     LIGACAO = "Ligação"
@@ -30,6 +41,7 @@ class MotivoDeclinioEnum(str, Enum):
 
 # Schema para criação de um novo contato
 class ContactBase(BaseModel):
+    operador: OperadorEnum
     dataContato: datetime
     nomeCliente: str = Field(..., min_length=1, max_length=100)
     pessoaContato: str = Field(..., min_length=1, max_length=100)
@@ -61,6 +73,7 @@ class ContactResponse(ContactBase):
 
 
 class ContactUpdate(BaseModel):
+    operador: Optional[OperadorEnum] = None
     dataContato: Optional[datetime] = None
     nomeCliente: Optional[str] = Field(None, min_length=1, max_length=100)
     pessoaContato: Optional[str] = Field(None, min_length=1, max_length=100)
