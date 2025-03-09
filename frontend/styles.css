@@ -1,0 +1,39 @@
+/* styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap');
+
+/* Aplica a fonte "Source Sans Pro" para todos os elementos */
+body, h1, h2, h3, h4, h5, h6, p, div, span, input, button, textarea, select, table, th, td {
+    font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+/* Ajustes específicos para títulos */
+h1 {
+    font-size: 44px !important; /* Tamanho aumentado */
+    font-weight: 700 !important; /* Negrito */
+}
+
+h2 {
+    font-size: 24px !important; /* Tamanho aumentado */
+    font-weight: 600 !important; /* Semi-negrito */
+}
+
+h3 {
+    font-size: 20px !important; /* Tamanho aumentado */
+    font-weight: 600 !important; /* Semi-negrito */
+}
+
+/* Ajustes para tabelas */
+table {
+    font-size: 14px !important;
+    width: 100%;
+}
+
+/* Ajustes para botões */
+button {
+    font-size: 14px !important;
+}
+
+/* Ajustes para inputs e textareas */
+input, textarea, select {
+    font-size: 14px !important;
+}
