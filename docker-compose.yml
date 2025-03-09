@@ -19,13 +19,12 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./backend:/app
-    environment:
-      # DATABASE_URL: postgresql://user:password@postgres/mydatabase
-      POSTGRES_HOST: ${POSTGRES_HOST}  # Usa a variável de ambiente
-      POSTGRES_USER: ${POSTGRES_USER}  # Usa a variável de ambiente
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}  # Usa a variável de ambiente
-      POSTGRES_DB: ${POSTGRES_DB}  # Usa a variável de ambiente
-      POSTGRES_PORT: ${POSTGRES_PORT}  # Usa a variável de ambiente
+    environment: # Usa as variáveis de ambiente do arquivo .env
+      POSTGRES_HOST: ${POSTGRES_HOST}  
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB} 
+      POSTGRES_PORT: ${POSTGRES_PORT}
     ports:
       - "8000:8000"
     # depends_on:
@@ -33,16 +32,16 @@ services:
     networks:
       - mynetwork
 
-  frontend:
-    build: 
-      context: ./frontend
-      dockerfile: Dockerfile
-    volumes:
-      - ./frontend:/app
-    ports:
-      - "8501:8501"
-    networks:
-      - mynetwork
+  # frontend:
+  #   build: 
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./frontend:/app
+  #   ports:
+  #     - "8501:8501"
+  #   networks:
+  #     - mynetwork
         
 networks:
   mynetwork:

@@ -3,23 +3,31 @@ from schemas import ContactUpdate, ContactCreate
 from models import ContactModel
 
 
-def get_contact(db: Session, contact_id: int):
-    """
-    funcao que recebe um id e retorna o elemento com esse id
-    """
-    return db.query(ContactModel).filter(ContactModel.id == contact_id).first()
-
+# Funções para manupulação de dados:
+# CRUD - Create, Read, Update, Delete
+# Create - Criar
+# Read - Ler
+# Update - Atualizar
+# Delete - Deletar
 
 def get_contacts(db: Session):
     """
-    funcao que retorna todos os elementos
+    funcao que retorna todos os elementos da tabela Contact - Read
     """
     return db.query(ContactModel).all()
 
 
+def get_contact(db: Session, contact_id: int):
+    """
+    funcao que recebe um id e retorna o elemento com esse id na tabela Contact - Read
+    """
+    return db.query(ContactModel).filter(ContactModel.id == contact_id).first()
+
+
+
 def create_contact(db: Session, contact: ContactCreate):
     """
-    funcao que cria um novo elemento
+    funcao que cria um novo elemento - Create
     """
     db_contact = ContactModel(**contact.model_dump())
     db.add(db_contact)
@@ -30,7 +38,7 @@ def create_contact(db: Session, contact: ContactCreate):
 
 def delete_contact(db: Session, contact_id: int):
     """
-    funcao que deleta um elemento
+    funcao que deleta um elemento - Delete
     """
     db_contact = db.query(ContactModel).filter(ContactModel.id == contact_id).first()
     db.delete(db_contact)
@@ -40,7 +48,7 @@ def delete_contact(db: Session, contact_id: int):
 
 def update_contact(db: Session, contact_id: int, contact: ContactUpdate):
     """
-    funcao que atualiza um elemento
+    funcao que atualiza um elemento - Update
     """
     db_contact = db.query(ContactModel).filter(ContactModel.id == contact_id).first()
 

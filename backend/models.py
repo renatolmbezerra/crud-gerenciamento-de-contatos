@@ -4,7 +4,7 @@ from database import Base
 
 
 class ContactModel(Base):
-    __tablename__ = "contatos"  # esse será o nome da tabela
+    __tablename__ = "contacts"  # esse será o nome da tabela
 
     id = Column(Integer, primary_key=True, index=True)
     operador = Column(String, index=True)
