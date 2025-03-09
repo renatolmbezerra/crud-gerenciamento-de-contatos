@@ -1,6 +1,6 @@
 from pydantic import BaseModel, validator, Field
 from enum import Enum
-from datetime import datetime
+from datetime import datetime, date
 from typing import Optional
 
 
@@ -11,9 +11,9 @@ class OperadorEnum(str, Enum):
     OPERADOR_3 = "João"
     OPERADOR_4 = "Pedro"
     OPERADOR_5 = "Maria"
-    OPERADOR_5 = "Ana"
-    OPERADOR_6 = "José"
-    OPERADOR_7 = "Carlos"
+    OPERADOR_6 = "Ana"
+    OPERADOR_7 = "José"
+    OPERADOR_8 = "Carlos"
 
 
 class FormaContatoEnum(str, Enum):
@@ -42,7 +42,7 @@ class MotivoDeclinioEnum(str, Enum):
 # Schema para criação de um novo contato
 class ContactBase(BaseModel):
     operador: OperadorEnum
-    dataContato: datetime
+    dataContato: date
     nomeCliente: str = Field(..., min_length=1, max_length=100)
     pessoaContato: str = Field(..., min_length=1, max_length=100)
     formaContato1: FormaContatoEnum
@@ -55,8 +55,8 @@ class ContactBase(BaseModel):
     # Validação para garantir que a data do contato não seja no futuro
     @validator('dataContato')
     def data_nao_pode_ser_futura(cls, value):
-        if value > datetime.now():
-            raise ValueError('A data do contato não pode ser no futuro')
+        if value > date.today():
+            raise ValueError('A data não pode ser no futuro')
         return value
 
 
@@ -74,7 +74,7 @@ class ContactResponse(ContactBase):
 
 class ContactUpdate(BaseModel):
     operador: Optional[OperadorEnum] = None
-    dataContato: Optional[datetime] = None
+    dataContato: Optional[date] = None
     nomeCliente: Optional[str] = Field(None, min_length=1, max_length=100)
     pessoaContato: Optional[str] = Field(None, min_length=1, max_length=100)
     formaContato1: Optional[FormaContatoEnum] = None
@@ -86,6 +86,6 @@ class ContactUpdate(BaseModel):
 
     @validator('dataContato')
     def data_nao_pode_ser_futura(cls, value):
-        if value and value > datetime.now():
+        if value and value > date.today():
             raise ValueError('A data do contato não pode ser no futuro')
         return value

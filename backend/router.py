@@ -44,7 +44,7 @@ def read_one_contact_route(contact_id: int, db: Session = Depends(get_db)):
 ### Rota para criar um item
 @router.post("/contacts/", response_model=ContactResponse)
 def create_contact_route(contact: ContactCreate, db: Session = Depends(get_db)):
-    """"
+    """
     Rota que cria um novo item no banco de dados
     """
     return create_contact(db=db, contact=contact)

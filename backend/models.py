@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, Date
 from sqlalchemy.sql import func
 from database import Base
 
@@ -8,7 +8,7 @@ class ContactModel(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     operador = Column(String, index=True)
-    dataContato = Column(DateTime(timezone=True), index=True)
+    dataContato = Column(Date, index=True)
     nomeCliente = Column(String, index=True)
     pessoaContato = Column(String, index=True)
     formaContato1 = Column(String, index=True)
