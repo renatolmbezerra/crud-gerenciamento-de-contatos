@@ -17,7 +17,7 @@ load_css("styles.css")
 st.image("logo.png", width=200)
 st.title("Gerenciamento de Contatos")
 
-path_backend = "http://backend:8000/contacts/"
+path_backend = "https://backend-contatos.onrender.com/contacts/"
 
 
 # Função auxiliar para exibir mensagens de erro detalhadas
