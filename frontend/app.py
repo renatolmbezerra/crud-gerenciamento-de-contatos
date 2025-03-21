@@ -104,8 +104,8 @@ with st.expander("Visualizar Contatos"):
                 ]
             ]
 
-            # Exibe o DataFrame sem o índice
-            st.write(df.to_html(index=False), unsafe_allow_html=True)
+            # Exibe o DataFrame dentro de um contêiner responsivo
+            st.markdown('<div class="responsive-table">' + df.to_html(index=False) + '</div>', unsafe_allow_html=True)
         else:
             show_response_message(response)
 
@@ -135,8 +135,8 @@ with st.expander("Obter Detalhes de um Contato"):
                 ]
             ]
 
-            # Exibe o DataFrame sem o índice
-            st.write(df.to_html(index=False), unsafe_allow_html=True)
+            # Exibe o DataFrame dentro de um contêiner responsivo
+            st.markdown('<div class="responsive-table">' + df.to_html(index=False) + '</div>', unsafe_allow_html=True)
         else:
             show_response_message(response)
 

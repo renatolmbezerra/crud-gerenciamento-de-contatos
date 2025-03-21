@@ -26,6 +26,28 @@ h3 {
 table {
     font-size: 14px !important;
     width: 100%;
+    border-collapse: collapse; /* Remove espaços entre células */
+}
+
+/* Estilo para tabelas responsivas */
+.responsive-table {
+    overflow-x: auto; /* Permite rolagem horizontal em telas pequenas */
+    margin-bottom: 20px; /* Espaçamento abaixo da tabela */
+}
+
+.responsive-table table {
+    width: 100%; /* Garante que a tabela ocupe 100% do contêiner */
+}
+
+.responsive-table th, .responsive-table td {
+    padding: 8px; /* Espaçamento interno das células */
+    text-align: left; /* Alinhamento do texto à esquerda */
+    border: 1px solid #ddd; /* Borda das células */
+}
+
+.responsive-table th {
+    background-color: #f2f2f2; /* Cor de fundo para cabeçalhos */
+    font-weight: 600; /* Negrito para cabeçalhos */
 }
 
 /* Ajustes para botões */
