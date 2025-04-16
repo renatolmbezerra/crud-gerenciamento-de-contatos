@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
@@ -17,6 +17,7 @@ def load_settings():
         "db_pass": os.getenv("POSTGRES_PASSWORD"),
         "db_name": os.getenv("POSTGRES_DB"),
         "db_port": os.getenv("POSTGRES_PORT"),
+        "db_ssl": os.getenv("POSTGRES_SSLMODE"),
     }
 
     # Valida se todas as variáveis de ambiente foram carregadas
@@ -32,7 +33,7 @@ settings = load_settings()
 password = quote_plus(settings['db_pass'])
 
 # Monta a string de conexão do banco de dados
-SQLALCHEMY_DATABASE_URL = f"postgresql://{settings['db_user']}:{password}@{settings['db_host']}:{settings['db_port']}/{settings['db_name']}"
+SQLALCHEMY_DATABASE_URL = f"postgresql://{settings['db_user']}:{password}@{settings['db_host']}:{settings['db_port']}/{settings['db_name']}?sslmode={settings['db_ssl']}"
 
 # Cria o motor do banco de dados, é a conexão com o banco
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
@@ -49,3 +50,14 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+if __name__ == "__main__":
+    print("Testando conexão com o banco de dados...")
+    try:
+        conn = engine.connect()
+        conn.execute(text("SELECT 1"))
+        print("✅ Conexão bem-sucedida!")
+        conn.close()
+    except Exception as e:
+        print(f"❌ Falha na conexão: {str(e)}")
