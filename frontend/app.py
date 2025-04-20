@@ -14,7 +14,7 @@ def load_css(file_name):
 load_css("styles.css")
 
 # Título e logo
-st.image("logo.png", width=200)
+st.image("assets/logo.png", width=200)
 st.title("Gerenciamento de Contatos")
 
 # path_backend = "https://backend-contatos.onrender.com/contacts/"
