@@ -52,6 +52,8 @@ def get_db():
         db.close()
 
 
+# Teste de conexão com o banco de dados
+# Este bloco de código é executado apenas se o arquivo for executado diretamente
 if __name__ == "__main__":
     print("Testando conexão com o banco de dados...")
     try:
