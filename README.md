@@ -9,7 +9,7 @@ Aplicação desenvolvida para registrar e acompanhar os **contatos realizados en
 O objetivo principal da aplicação é facilitar o **cadastro de interações com clientes**, sejam elas:
 
 - **Ativas**: quando o operador entra em contato para oferecer produtos.
-- **Receptivas**: quando o cliente procura a empresa com uma demanda.
+- **Receptivas**: quando o cliente procura a empresa com uma demanda (Ex: pedir um orçamento).
 
 Esses contatos podem ocorrer por diversos canais, como:
 
@@ -28,16 +28,16 @@ A aplicação foi desenvolvida com arquitetura de microsserviços containerizado
 ```mermaid
 flowchart TD
     subgraph Usuário
-        A[Operador] -->|Interage via| B[Frontend\nStreamlit]
+        A[Operador] -->|Interage via| B[Frontend<br>Streamlit]
     end
 
     subgraph Aplicação
-        B -->|HTTP Requests| C[Backend\nFastAPI]
-        C --> D[(PostgreSQL\nDatabase)]
+        B -->|HTTP Requests| C[Backend<br>FastAPI]
+        C --> D[(PostgreSQL<br>Database)]
     end
 
     subgraph Visualização
-        D -->|Consulta direta| E[Dashboards\nPower BI]
+        D -->|Consulta direta| E[Dashboards<br>Power BI]
     end
 
     subgraph Infraestrutura
@@ -85,30 +85,51 @@ gerenciamento-de-contatos/
 
 ## ✨ Resultado: Visualização em Dashboard
 
-Após o registro dos contatos, os dados são armazenados em um banco PostgreSQL e **consumidos diretamente no Power BI** para a criação de dashboards com indicadores comerciais.
+Após o registro dos contatos, os dados são armazenados em um banco de dados PostgreSQL na Digital Ocean e **consumidos diretamente no Power BI** para a criação de um dashboard com indicadores comerciais.
 
 ### 📱 Aplicação Web
+---
 ![App](./assets/app.png)
 
 ### 📊 Dashboard Power BI
+---
 ![Dashboard](./assets/dashboard.png)
 
 ---
 
 ## 🚀 Como Executar o Projeto
 
-- Docker Desktop instalado
-- Instância do PostgreSQL 
-    - Criar uma instância gratuita na Render: https://render.com/docs/postgresql-creating-connecting
+### Pré-requisitos:
+- Docker Desktop instalado.
 
-### 1. Clone o repositório
+### 1. Crie uma instância do PostgreSQL
+Você pode usar serviços como:
+- [Render](https://render.com/) (possui plano gratuito)
+- [DigitalOcean](https://www.digitalocean.com/) (possui um plano de testes gratuito com U$200 por 60 dias)
+
+### 2. Clone o repositório
 
 ```bash
 git clone https://github.com/renatolmbezerra/crud-gerenciamento-de-contatos.git
 cd crud-gerenciamento-de-contatos
 ```
 
-### 2. Suba os containers com Docker
+### 3. Configure as variáveis de ambiente
+Crie um arquivo `.env` na raiz do projeto. Para facilitar, copie o arquivo de exemplo:
+```bash
+cp .env.example .env
+```
+Preencha as variáveis com os dados fornecidos pelo serviço onde você criou o banco:
+```bash
+POSTGRES_HOST=seu_host
+POSTGRES_USER=seu_usuario
+POSTGRES_PASSWORD=sua_senha
+POSTGRES_DB=nome_do_banco
+POSTGRES_PORT=sua_porta
+POSTGRES_SSLMODE=require
+```
+### 4. Rode o projeto com Docker
+Com o `.env` configurado, inicie o projeto:
 
 ```bash
 docker-compose up --build
@@ -117,7 +138,7 @@ docker-compose up --build
 A aplicação será executada nos seguintes serviços:
 
 - Frontend: `http://localhost:8501`
-- Backend API: `http://localhost:8000`
+- Backend API (Swagger): `http://localhost:8000/docs`
 
 ---
 
@@ -126,8 +147,7 @@ A aplicação será executada nos seguintes serviços:
 A aplicação está disponível para testes em produção:
 
 - **App Web**: [https://contacts.my-app.ddns-ip.net](https://contacts.my-app.ddns-ip.net)
-- **API (Swagger)**: [https://contacts.my-app.ddns-ip.net/docs](https://contacts.my-app.ddns-ip.net/docs)
-- **Dashboard (Power BI online)**: [https://app.powerbi.com/groups/me/reports/...](https://app.powerbi.com/groups/me/reports/...)
+- **Dashboard (Power BI online)**: [https://app.powerbi.com/view?r=eyJrIjoiNTk1NmQyNmYtMjI2Zi00NzAyLTk3MDktNDY4MWI2MjJkMThlIiwidCI6IjgxZjE0NzY4LWQxMjctNDZlZS1iNGJkLTJhMDA5ZmVjMTYzZiJ9](https://app.powerbi.com/view?r=eyJrIjoiNTk1NmQyNmYtMjI2Zi00NzAyLTk3MDktNDY4MWI2MjJkMThlIiwidCI6IjgxZjE0NzY4LWQxMjctNDZlZS1iNGJkLTJhMDA5ZmVjMTYzZiJ9)
 
 ---
 
