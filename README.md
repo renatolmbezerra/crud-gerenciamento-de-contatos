@@ -89,11 +89,11 @@ Após o registro dos contatos, os dados são armazenados em um banco de dados Po
 
 ### 📱 Aplicação Web
 ---
-![App](./assets/app.png)
+[![App](./assets/app.png)](https://contacts.my-app.ddns-ip.net)
 
 ### 📊 Dashboard Power BI
 ---
-![Dashboard](./assets/dashboard.png)
+[![Dashboard](./assets/dashboard.png)](https://app.powerbi.com/view?r=eyJrIjoiNTk1NmQyNmYtMjI2Zi00NzAyLTk3MDktNDY4MWI2MjJkMThlIiwidCI6IjgxZjE0NzY4LWQxMjctNDZlZS1iNGJkLTJhMDA5ZmVjMTYzZiJ9)
 
 ---
 
@@ -147,9 +147,9 @@ A aplicação será executada nos seguintes serviços:
 A aplicação está disponível para testes em produção:
 
 - **App Web**: [https://contacts.my-app.ddns-ip.net](https://contacts.my-app.ddns-ip.net)
-- **Dashboard (Power BI online)**: [https://app.powerbi.com/view?r=eyJrIjoiNTk1NmQyNmYtMjI2Zi00NzAyLTk3MDktNDY4MWI2MjJkMThlIiwidCI6IjgxZjE0NzY4LWQxMjctNDZlZS1iNGJkLTJhMDA5ZmVjMTYzZiJ9](https://app.powerbi.com/view?r=eyJrIjoiNTk1NmQyNmYtMjI2Zi00NzAyLTk3MDktNDY4MWI2MjJkMThlIiwidCI6IjgxZjE0NzY4LWQxMjctNDZlZS1iNGJkLTJhMDA5ZmVjMTYzZiJ9)
+- **Dashboard (Power BI online)**: [https://app.powerbi.com/contatos-dashboard](https://app.powerbi.com/view?r=eyJrIjoiNTk1NmQyNmYtMjI2Zi00NzAyLTk3MDktNDY4MWI2MjJkMThlIiwidCI6IjgxZjE0NzY4LWQxMjctNDZlZS1iNGJkLTJhMDA5ZmVjMTYzZiJ9)
 
-Nota: O aplicativo está rodando através de containers Docker para cada serviço `backend` e `frontend`em um droplet na Cloud Digital Ocean: 
+Nota: O aplicativo está rodando através de containers Docker para cada serviço `backend` e `frontend`em um droplet na Cloud Digital Ocean com a seguinte configuração: 
  - Ubuntu 24.10 x64 
  - 2 vCPUs 
  - 2GB / 60GB Disk
