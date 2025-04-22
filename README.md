@@ -149,26 +149,31 @@ A aplicação está disponível para testes em produção:
 - **App Web**: [https://contacts.my-app.ddns-ip.net](https://contacts.my-app.ddns-ip.net)
 - **Dashboard (Power BI online)**: [https://app.powerbi.com/view?r=eyJrIjoiNTk1NmQyNmYtMjI2Zi00NzAyLTk3MDktNDY4MWI2MjJkMThlIiwidCI6IjgxZjE0NzY4LWQxMjctNDZlZS1iNGJkLTJhMDA5ZmVjMTYzZiJ9](https://app.powerbi.com/view?r=eyJrIjoiNTk1NmQyNmYtMjI2Zi00NzAyLTk3MDktNDY4MWI2MjJkMThlIiwidCI6IjgxZjE0NzY4LWQxMjctNDZlZS1iNGJkLTJhMDA5ZmVjMTYzZiJ9)
 
+Nota: O aplicativo está rodando através de containers Docker para cada serviço `backend` e `frontend`em um droplet na Cloud Digital Ocean: 
+ - Ubuntu 24.10 x64 
+ - 2 vCPUs 
+ - 2GB / 60GB Disk
+
 ---
 
 ## 🧰 Tecnologias Utilizadas
 
 ### Backend
 
-- [FastAPI](https://fastapi.tiangolo.com/)
-- [SQLAlchemy](https://www.sqlalchemy.org/)
-- [Pydantic](https://docs.pydantic.dev/)
-- [Uvicorn](https://www.uvicorn.org/)
+- [FastAPI:](https://fastapi.tiangolo.com/) Framework Python moderno para construção rápida de APIs RESTful com documentação automática
+- [SQLAlchemy:](https://www.sqlalchemy.org/) ORM que permite interagir com bancos de dados usando objetos e métodos Python no lugar de SQL cru
+- [Pydantic:](https://docs.pydantic.dev/) Validação de dados nas requisições da API com tipagem estática
+- [Uvicorn:](https://www.uvicorn.org/) Servidor ASGI leve para deploy eficiente da aplicação FastAPI
 
 ### Frontend
 
-- [Streamlit](https://streamlit.io/)
-- [Pandas](https://pandas.pydata.org/)
-- [Requests](https://requests.readthedocs.io/)
+- [Streamlit:](https://streamlit.io/) Framework para criar interfaces web em Python sem necessidade de HTML/JS
+- [Pandas:](https://pandas.pydata.org/) Processamento dos dados de contatos para exibição em tabelas e gráficos
+- [Requests:](https://requests.readthedocs.io/) Biblioteca para comunicação HTTP entre frontend e backend
 
 ### Infraestrutura
 
-- [Docker](https://www.docker.com/)
-- [PostgreSQL (Digital Ocean)](https://www.digitalocean.com/)
-- [Nginx (reverse proxy)](https://www.nginx.com/)
-- [Power BI](https://powerbi.microsoft.com/)
+- [Docker:](https://www.docker.com/) Containerização da aplicação evitando o "Na minha máquina funciona"
+- [PostgreSQL (Digital Ocean):](https://www.digitalocean.com/) Robusto Banco de dados relacional em nuvem
+- [Nginx (reverse proxy):](https://www.nginx.com/) Proxy reverso e balanceador de carga com segurança aplicada
+- [Power BI:](https://powerbi.microsoft.com/) Ferramente de visualização de dados e dashboards
