@@ -173,7 +173,7 @@ Nota: O aplicativo está rodando através de containers Docker para cada serviç
 
 ### Infraestrutura
 
-- [Docker:](https://www.docker.com/) Containerização da aplicação evitando o "Na minha máquina funciona"
+- [Docker:](https://www.docker.com/) Containerização da aplicação evitando o famoso: "Na minha máquina funciona"
 - [PostgreSQL (Digital Ocean):](https://www.digitalocean.com/) Robusto Banco de dados relacional em nuvem
 - [Nginx (reverse proxy):](https://www.nginx.com/) Proxy reverso e balanceador de carga com segurança aplicada
-- [Power BI:](https://powerbi.microsoft.com/) Ferramente de visualização de dados e dashboards
+- [Power BI:](https://powerbi.microsoft.com/) Ferramenta de visualização de dados e dashboards
