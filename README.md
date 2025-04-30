@@ -25,37 +25,7 @@ Esses contatos podem ocorrer por diversos canais, como:
 
 A aplicação foi desenvolvida com arquitetura de microsserviços containerizados, permitindo escalabilidade e fácil manutenção.
 
-```mermaid
-flowchart TD
-    subgraph Usuário
-        A[Operador] -->|Interage via| B[Frontend<br>Streamlit]
-    end
-
-    subgraph Aplicação
-        B -->|HTTP Requests| C[Backend<br>FastAPI]
-        C --> D[(PostgreSQL<br>Database)]
-    end
-
-    subgraph Visualização
-        D -->|Consulta direta| E[Dashboards<br>Power BI]
-    end
-
-    subgraph Infraestrutura
-        F[Docker Compose]
-        G[Nginx Reverse Proxy]
-        F --> B & C & D
-        G --> B
-    end
-
-    classDef user fill:#d4f1f9,stroke:#333
-    classDef app fill:#e7f9d4,stroke:#333
-    classDef viz fill:#f9d4e7,stroke:#333
-    classDef infra fill:#f9f9d4,stroke:#333
-    class A user
-    class B,C,D app
-    class E viz
-    class F,G infra
-```
+![Arquitetura](./assets/architecture.svg)
 
 ---
 
